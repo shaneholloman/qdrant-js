@@ -589,14 +589,16 @@ export class QdrantClient {
         {
             wait = true,
             ordering,
+            timeout,
             points,
             shard_key,
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['UpdateVectors'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['UpdateVectors'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.updateVectors({
             collection_name,
             wait,
             ordering,
+            timeout,
             points,
             shard_key,
         });
@@ -628,16 +630,18 @@ export class QdrantClient {
         {
             wait = true,
             ordering,
+            timeout,
             points,
             filter,
             vector,
             shard_key,
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['DeleteVectors'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['DeleteVectors'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.deleteVectors({
             collection_name,
             wait,
             ordering,
+            timeout,
             points,
             filter,
             vector,
@@ -796,13 +800,15 @@ export class QdrantClient {
         {
             wait = true,
             ordering,
+            timeout,
             ...points_or_batch
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['PointInsertOperations'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['PointInsertOperations'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.upsertPoints({
             collection_name,
             wait,
             ordering,
+            timeout,
             ...points_or_batch,
         });
         return response.data.result ?? noResultError();
@@ -893,13 +899,15 @@ export class QdrantClient {
         {
             wait,
             ordering,
+            timeout,
             ...points_selector
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['PointsSelector'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['PointsSelector'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.deletePoints({
             collection_name,
             wait,
             ordering,
+            timeout,
             ...points_selector,
         });
         return response.data.result ?? noResultError();
@@ -947,8 +955,9 @@ export class QdrantClient {
             shard_key,
             key,
             ordering,
+            timeout,
             wait = true,
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['SetPayload'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['SetPayload'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.setPayload({
             collection_name,
@@ -959,6 +968,7 @@ export class QdrantClient {
             key,
             wait,
             ordering,
+            timeout,
         });
         return response.data.result ?? noResultError();
     }
@@ -1002,13 +1012,14 @@ export class QdrantClient {
         collection_name: string,
         {
             ordering,
+            timeout,
             payload,
             points,
             filter,
             shard_key,
             key,
             wait = true,
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['SetPayload'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['SetPayload'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.overwritePayload({
             collection_name,
@@ -1019,6 +1030,7 @@ export class QdrantClient {
             key,
             wait,
             ordering,
+            timeout,
         });
         return response.data.result ?? noResultError();
     }
@@ -1059,12 +1071,14 @@ export class QdrantClient {
         collection_name: string,
         {
             ordering,
+            timeout,
             keys,
             points,
             filter,
             shard_key,
             wait = true,
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['PointsSelector'] & Schemas['DeletePayload'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['PointsSelector'] &
+            Schemas['DeletePayload'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.deletePayload({
             collection_name,
@@ -1074,6 +1088,7 @@ export class QdrantClient {
             shard_key,
             wait,
             ordering,
+            timeout,
         });
         return response.data.result ?? noResultError();
     }
@@ -1112,14 +1127,16 @@ export class QdrantClient {
         collection_name: string,
         {
             ordering,
+            timeout,
             wait = true,
             ...points_selector
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['PointsSelector'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['PointsSelector'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.clearPayload({
             collection_name,
             wait,
             ordering,
+            timeout,
             ...points_selector,
         });
         return response.data.result ?? noResultError();
@@ -1400,9 +1417,10 @@ export class QdrantClient {
         {
             wait,
             ordering,
+            timeout,
             field_name,
             field_schema,
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['CreateFieldIndex'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['CreateFieldIndex'],
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.createFieldIndex({
             collection_name,
@@ -1410,6 +1428,7 @@ export class QdrantClient {
             field_schema,
             wait,
             ordering,
+            timeout,
         });
         return response.data.result ?? noResultError();
     }
@@ -1434,13 +1453,14 @@ export class QdrantClient {
     async deletePayloadIndex(
         collection_name: string,
         field_name: string,
-        {wait = true, ordering}: {wait?: boolean; ordering?: Schemas['WriteOrdering']} = {},
+        {wait = true, ordering, timeout}: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} = {},
     ): Promise<Schemas['UpdateResult']> {
         const response = await this._openApiClient.deleteFieldIndex({
             collection_name,
             field_name,
             wait,
             ordering,
+            timeout,
         });
         return response.data.result ?? noResultError();
     }
@@ -1561,13 +1581,15 @@ export class QdrantClient {
         {
             wait = true,
             ordering,
+            timeout,
             ...operations
-        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']} & Schemas['UpdateOperations'],
+        }: {wait?: boolean; ordering?: Schemas['WriteOrdering']; timeout?: number} & Schemas['UpdateOperations'],
     ): Promise<Schemas['UpdateResult'][]> {
         const response = await this._openApiClient.batchUpdate({
             collection_name,
             wait,
             ordering,
+            timeout,
             ...operations,
         });
         return response.data.result ?? noResultError();
@@ -1645,6 +1667,16 @@ export class QdrantClient {
             snapshot_name,
             wait,
         });
+        return response.data.result ?? noResultError();
+    }
+
+    /**
+     * List shard keys
+     * @param collection_name Name of the collection
+     * @returns Shard keys response
+     */
+    async listShardKeys(collection_name: string): Promise<Schemas['ShardKeysResponse']> {
+        const response = await this._openApiClient.listShardKeys({collection_name});
         return response.data.result ?? noResultError();
     }
 
@@ -1795,6 +1827,41 @@ export class QdrantClient {
             timeout,
             searches,
         });
+        return response.data.result ?? noResultError();
+    }
+
+    /**
+     * Collect cluster telemetry data
+     * @description Get telemetry data, from the point of view of the cluster.
+     * This includes peers info, collections info, shard transfers, and resharding status.
+     * @param {object} args
+     *     - details_level: The level of detail to include in the response
+     *     - timeout: Timeout for this request
+     * @returns Cluster telemetry data
+     */
+    async clusterTelemetry(args?: {
+        details_level?: number;
+        timeout?: number;
+    }): Promise<Schemas['DistributedTelemetryData']> {
+        const response = await this._openApiClient.clusterTelemetry(args ?? {});
+        return response.data.result ?? noResultError();
+    }
+
+    /**
+     * Get optimization progress
+     * @description Get progress of ongoing and completed optimizations for a collection
+     * @param collection_name Name of the collection
+     * @param {object} args
+     *     - with: Comma-separated list of optional fields to include in the response.
+     *             Possible values: queued, completed, idle_segments.
+     *     - completed_limit: Maximum number of completed optimizations to return.
+     * @returns Optimizations progress
+     */
+    async getOptimizations(
+        collection_name: string,
+        args?: {with?: string; completed_limit?: number},
+    ): Promise<Schemas['OptimizationsResponse']> {
+        const response = await this._openApiClient.getOptimizations({collection_name, ...args});
         return response.data.result ?? noResultError();
     }
 

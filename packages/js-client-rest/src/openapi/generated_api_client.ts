@@ -5,6 +5,13 @@ import {ClientApi} from './generated_client_type.js';
 
 export function createClientApi(client: Client) : ClientApi {
   return {
+    /** List shard keys */
+    listShardKeys:
+      client
+      .path('/collections/{collection_name}/shards')
+      .method('get')
+      .create(),
+    
     /** Create shard key */
     createShardKey:
       client
@@ -113,6 +120,16 @@ export function createClientApi(client: Client) : ClientApi {
       .method('get')
       .create(),
     
+    /**
+         * Collect cluster telemetry data 
+         * @description Get telemetry data, from the point of view of the cluster. This includes peers info, collections info, shard transfers, and resharding status
+         */
+    clusterTelemetry:
+      client
+      .path('/cluster/telemetry')
+      .method('get')
+      .create(),
+    
     /** Tries to recover current peer Raft state. */
     recoverCurrentPeer:
       client
@@ -209,6 +226,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -232,6 +250,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -252,6 +271,16 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         timeout: true,
       }),
+    
+    /**
+         * Get optimization progress 
+         * @description Get progress of ongoing and completed optimizations for a collection
+         */
+    getOptimizations:
+      client
+      .path('/collections/{collection_name}/optimizations')
+      .method('get')
+      .create(),
     
     /**
          * List aliases for collection 
@@ -388,6 +417,16 @@ export function createClientApi(client: Client) : ClientApi {
       }),
     
     /**
+         * Download shard snapshot 
+         * @description Stream the current state of a shard as a snapshot file
+         */
+    streamShardSnapshot:
+      client
+      .path('/collections/{collection_name}/shards/{shard_id}/snapshot')
+      .method('get')
+      .create(),
+    
+    /**
          * Recover shard from an uploaded snapshot 
          * @description Recover shard of a local collection from an uploaded snapshot. This will overwrite any data, stored on this node, for the collection shard.
          */
@@ -478,6 +517,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -504,6 +544,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -517,6 +558,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -530,6 +572,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -543,6 +586,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -556,6 +600,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -569,6 +614,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -582,6 +628,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
@@ -595,6 +642,7 @@ export function createClientApi(client: Client) : ClientApi {
       .create({
         wait: true,
         ordering: true,
+        timeout: true,
       }),
     
     /**
